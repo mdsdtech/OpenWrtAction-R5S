@@ -172,6 +172,9 @@ jobs:
       - name: Free Disk Space
         if: steps.matrix_status.outputs.status != 'success'
         run: |
+          echo "==== Disk space before cleanup ===="
+          df -hT
+          echo "==== Clean disk space begin ===="
           sudo rm -rf /usr/share/dotnet
           sudo rm -rf /usr/local/lib/android
           sudo rm -rf /usr/share/swift
@@ -179,7 +182,10 @@ jobs:
           sudo rm -rf /opt/ghc
           sudo rm -rf /opt/hostedtoolcache/CodeQL
           sudo docker image prune --all --force
-          
+          echo "==== Clean disk space complete ===="
+          echo "==== Disk space after cleanup ===="
+          df -hT
+
       - name: Install Packages
         if: steps.matrix_status.outputs.status != 'success'
         env:
