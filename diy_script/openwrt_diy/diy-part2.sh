@@ -106,6 +106,9 @@ echo "🎉 所有插件注入完毕，保持了原汁原味的 Makefile 相对�
 # Modify default IP
 sed -i 's/192.168.1.1/10.10.0.253/g' package/base-files/files/bin/config_generate
 
+# fixed luci-app-rustdesk-server reset config when update
+rm -rf feeds/luci/applications/luci-app-rustdesk-server/root/etc/uci-defaults
+
 # fixed rust host build download llvm in ci error
 # sed -i 's/--set=llvm\.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/' package/custom_overrides/rust/Makefile
 # grep -q -- '--ci false \\' package/custom_overrides/rust/Makefile || sed -i '/x\.py \\/a \        --ci false \\' package/custom_overrides/rust/Makefile
